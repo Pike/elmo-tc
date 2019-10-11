@@ -1,0 +1,35 @@
+---
+trust-domain: elmo
+# treeherder:
+#     group-names:
+#         'I': 'Docker Image Builds'
+
+task-priority: lowest
+
+# TODO: get secrets
+# github-token-secret: l10n/level-3/automation-bot-token
+
+taskgraph:
+    # TODO: Hook up our custom taskgraph
+    # register: l10n_taskgraph:register
+    repositories:
+        tooling:
+            name: "Elmo Taskcluster Tooling"
+            project-regex: elmo-tc
+            default-repository: https://github.com/Pike/elmo-tc
+            default-ref: master
+            type: git
+    cached-task-prefix: l10n.elmo
+
+workers:
+    aliases:
+        linux:
+            provisioner: aws-provisioner-v1
+            implementation: docker-worker
+            os: linux
+            worker-type: 'github-worker'
+        images:
+            provisioner: aws-provisioner-v1
+            implementation: docker-worker
+            os: linux
+            worker-type: 'github-worker'
