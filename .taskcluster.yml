@@ -12,8 +12,8 @@ tasks:
                   name: tools
                   description: Elmo Taskcluster Tooling
               treeherder: false
-          trustDomain: elmo
-          canonicalRepo: https://github.com/Pike/elmo-tc
+          trustDomain: l10n
+          canonicalRepo: https://github.com/mozilla-services/elmo-taskcluster
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
           then:
@@ -117,9 +117,9 @@ tasks:
                                         description: '${action.description}'
                                     else:
                                         name: "Decision Task for cron job ${cron.job_name}"
-                                        description: 'Created by a [cron task](https://tools.taskcluster.net/tasks/${cron.task_id})'
-                      provisionerId: "aws-provisioner-v1"
-                      workerType: "github-worker"
+                                        description: 'Created by a [cron task](https://firefox-ci-tc.services.mozilla.com/tasks/${cron.task_id})'
+                      provisionerId: "${trustDomain}-${level}"
+                      workerType: "decision"
                       tags:
                           $if: 'tasks_for in ["github-push", "github-pull-request"]'
                           then:
