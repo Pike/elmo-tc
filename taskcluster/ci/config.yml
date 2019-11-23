@@ -1,5 +1,5 @@
 ---
-trust-domain: elmo
+trust-domain: l10n
 # treeherder:
 #     group-names:
 #         'I': 'Docker Image Builds'
@@ -15,21 +15,21 @@ taskgraph:
     repositories:
         tooling:
             name: "Elmo Taskcluster Tooling"
-            project-regex: elmo-tc
-            default-repository: https://github.com/Pike/elmo-tc
+            project-regex: elmo-taskcluster
+            default-repository: https://github.com/mozilla-services/elmo-taskcluster
             default-ref: master
             type: git
-    cached-task-prefix: l10n.elmo
+    cached-task-prefix: l10n.elmo-taskcluster
 
 workers:
     aliases:
         linux:
-            provisioner: aws-provisioner-v1
+            provisioner: 'l10n-{level}'
             implementation: docker-worker
             os: linux
-            worker-type: 'github-worker'
+            worker-type: 'linux'
         images:
-            provisioner: aws-provisioner-v1
+            provisioner: 'l10n-{level}'
             implementation: docker-worker
             os: linux
-            worker-type: 'github-worker'
+            worker-type: 'images'
