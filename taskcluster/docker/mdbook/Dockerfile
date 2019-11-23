@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-FROM debian:buster-slim
+FROM debian:buster
 MAINTAINER Axel Hecht <axel@pike.org>
 
 # Add worker user
@@ -17,9 +17,7 @@ RUN apt-get update && apt-get install -y --force-yes --no-install-recommends \
     ca-certificates \
     curl \
     git
-RUN curl -L -o mdbook.tar.gz https://github.com/rust-lang-nursery/mdBook/releases/download/v0.3.1/mdbook-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
-RUN tar -zxf mdbook.tar.gz
-RUN mkdir -p /builds/worker/.local/bin && mv mdbook /builds/worker/.local/bin
+RUN curl -L https://github.com/rust-lang/mdBook/releases/download/v0.3.5/mdbook-v0.3.5-x86_64-unknown-linux-gnu.tar.gz|tar -C /builds/worker/.local/bin/ -zx
 ENV SHELL=/bin/bash \
     HOME=/builds/worker \
     PATH=/builds/worker/.local/bin:$PATH
