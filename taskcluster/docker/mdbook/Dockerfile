@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --force-yes --no-install-recommends \
     ca-certificates \
     curl \
     git
-RUN curl -L https://github.com/rust-lang/mdBook/releases/download/v0.3.5/mdbook-v0.3.5-x86_64-unknown-linux-gnu.tar.gz|tar -C /builds/worker/.local/bin/ -zx
+RUN curl -L https://github.com/rust-lang/mdBook/releases/download/v0.3.5/mdbook-v0.3.5-x86_64-unknown-linux-gnu.tar.gz|tar -C /usr/local/bin/ -zx
 ENV SHELL=/bin/bash \
     HOME=/builds/worker \
     PATH=/builds/worker/.local/bin:$PATH
