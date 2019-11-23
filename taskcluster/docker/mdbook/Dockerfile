@@ -14,7 +14,9 @@ RUN mkdir /builds && \
 # %include-run-task
 
 RUN apt-get update && apt-get install -y --force-yes --no-install-recommends \
-    ca-certificates curl
+    ca-certificates \
+    curl \
+    git
 RUN curl -L -o mdbook.tar.gz https://github.com/rust-lang-nursery/mdBook/releases/download/v0.3.1/mdbook-v0.3.1-x86_64-unknown-linux-gnu.tar.gz
 RUN tar -zxf mdbook.tar.gz
 RUN mkdir -p /builds/worker/.local/bin && mv mdbook /builds/worker/.local/bin
