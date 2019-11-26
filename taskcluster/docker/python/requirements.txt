@@ -1,0 +1,5 @@
+json-e==3.0.0
+jsonschema==3.2.0
+pytest==5.3.0
+PyYAML==5.1.2
+slugid==2.0.0
