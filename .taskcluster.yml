@@ -76,10 +76,20 @@ tasks:
               else:
                   $if: 'tasks_for == "cron"'
                   then: '${ownTaskId}'
+          # Need to wrap "a && b.c"
+          # https://github.com/taskcluster/json-e/issues/244
+          runDecisionTask:
+             $if: 'tasks_for in ["github-pull-request", "action", "cron"]'
+             then: true
+             else:
+                 $if: 'tasks_for == "github-push"'
+                 then:
+                     $if: "event.ref == 'refs/heads/' + event.repository.default_branch"
+                     then: true
+                     else: false
+                 else: false
       in:
-          $if: >
-            (tasks_for in ["github-pull-request", "action", "cron"]) ||
-            (tasks_for == "github-push" && event.ref == 'refs/heads/' + event.repository.default_branch)
+          $if: 'runDecisionTask'
           then:
             $let:
                 repositoryPrefix: '${uppercase(taskgraph.repository.name)}'
