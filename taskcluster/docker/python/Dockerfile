@@ -17,7 +17,7 @@ RUN mkdir /builds && \
 RUN apt-get update && apt-get install -y --force-yes --no-install-recommends \
     mercurial
 
-COPY --chown=worker:worker requirements.txt constraints.txt /
+COPY requirements.txt constraints.txt /
 RUN pip3 install -r requirements.txt -c constraints.txt
 
 ENV SHELL=/bin/bash \
